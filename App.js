@@ -1,13 +1,14 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { FontAwesome } from '@expo/vector-icons'
+import AddDeck from './components/AddDeck'
 
 
 export default class App extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <FontAwesome name='home' size={100} color='black' />
+      <View>
+        <AddDeck />
       </View>
     )
   }
