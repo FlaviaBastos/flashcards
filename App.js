@@ -7,7 +7,7 @@ import AddDeck from './components/AddDeck'
 export default class App extends React.Component {
   render() {
     return (
-      <View>
+      <View style={styles.container}>
         <AddDeck />
       </View>
     )
