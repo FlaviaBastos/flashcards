@@ -12,15 +12,16 @@ const STORAGE_KEY = 'Flashcards:deks'
 
 export function getDecks () {
   return AsyncStorage.getItem(STORAGE_KEY)
-    .then((decks) => {
-      console.log('GOT DECKS', decks)
-    })
+    .then(decks => decks)
 }
 
 export function getDeck (title) {
   return AsyncStorage.getItem(STORAGE_KEY)
-    .then((decks) => {
-      console.log('GOT ALL DECKS AND ', decks)
+    .then((results) => {
+      const data = JSON.parse(results)
+      console.log('DATA: ', data)
+      let deck = data[title]
+      return deck
     })
 }
 
@@ -33,18 +34,24 @@ export function saveDeckTitle (title) {
   }))
 }
 
-// export function addCardToDeck ({ title, card }) {
-//   return AsyncStorage.getItem(STORAGE_KEY)
-//   .then((results) => {
-//     const data = JSON.parse(results)
-//     console.log('')
-//     data[title] = undefined
-//     delete data[key]
-//     AsyncStorage.mergeItem(STORAGE_KEY, JSON.stringify({
-//       [title]: {
-//         'title': title,
-//         'questions': []
-//       }
-//     }))
-//   })
-// }
+export function addCardToDeck ({ title, card }) {
+  getDeck(title).then((deck) =>
+    console.log('adding card to this deck: ', deck)
+    // getting the correct deck
+  )
+
+  // .then
+  // return AsyncStorage.getItem(STORAGE_KEY)
+  // .then((results) => {
+  //   const data = JSON.parse(results)
+  //   console.log('')
+  //   data[title] = undefined
+  //   delete data[key]
+  //   AsyncStorage.mergeItem(STORAGE_KEY, JSON.stringify({
+  //     [title]: {
+  //       'title': title,
+  //       'questions': []
+  //     }
+  //   }))
+  // })
+}

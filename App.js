@@ -2,13 +2,15 @@ import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { FontAwesome } from '@expo/vector-icons'
 import AddDeck from './components/AddDeck'
+import AddQuestion from './components/AddQuestion'
 
 
 export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <AddDeck />
+        {/* <AddDeck /> */}
+        <AddQuestion toDeck="Test1" />
       </View>
     )
   }
