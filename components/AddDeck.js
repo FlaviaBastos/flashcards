@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native'
+import { saveDeckTitle, getDecks } from '../utils/api'
 
 function SubmitBtn ({ onPress }) {
   return (
@@ -14,41 +15,41 @@ function SubmitBtn ({ onPress }) {
 export default class AddDeck extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      input: ''
+    };
   }
-  //
-  // addDeckName = (name) => {
-  //   this.setState((state) => {
-  //     state[name]
-  //
-  //     return {
-  //       ...state,
-  //       [name]: {
-  //         'title': name
-  //       }
-  //     }
-  //   })
-  // }
+
+  handleTextChange = (input) => {
+    this.setState(() => ({
+      input
+    }))
+  }
 
   submit = () => {
     console.log('on submit')
-    const entry = this.state
+    const entry = this.state.input
     console.log('STATE:', entry)
-  //
-  // this.setState(() => ({ run: 0, bike: 0, swim: 0, sleep: 0, eat: 0 }))
-  //
+
+    saveDeckTitle(entry) // saves to AsyncStorage
+    // this.setState(() => ({ input: ''})) // clears local input (necessary?)
+
+    getDecks() // just for testing; not showing all
+
   // this.toHome()
-  //
-  // submitEntry({ key, entry }) // calls api AsyncStorage
-  //
-  // clearLocalNotification()
-  //   .then(setLocalNotification)
+
   }
 
   render() {
+    const { input } = this.state
     return (
       <View>
-        <Text>What is the title of your new deck?</Text>
+        <Text style={{alignSelf: 'center'}}>What is the title of your new deck?</Text>
+        <TextInput
+          value={input}
+          style={styles.input}
+          onChangeText={this.handleTextChange}
+        />
         <SubmitBtn onPress={this.submit} />
       </View>
     )
@@ -81,5 +82,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginLeft: 30,
     marginRight: 30,
+  },
+  input: {
+    width: 200,
+    height: 44,
+    padding: 8,
+    borderWidth: 1,
+    borderColor: '#757575',
+    margin: 50,
   },
 })
