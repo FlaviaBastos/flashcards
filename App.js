@@ -10,7 +10,7 @@ export default class App extends React.Component {
     return (
       <View style={styles.container}>
         {/* <AddDeck /> */}
-        <AddQuestion toDeck="Test1" />
+        <AddQuestion toDeck="D6" />
       </View>
     )
   }
