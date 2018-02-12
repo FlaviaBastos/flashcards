@@ -19,9 +19,9 @@ export function getDeck (title) {
   return AsyncStorage.getItem(STORAGE_KEY)
     .then((results) => {
       const data = JSON.parse(results)
-      console.log('DATA FROM GET DECK: ', data)
-      let deck = data[title]
-      return deck
+      // let deck = data[title] --> this not doing anything
+      // console.log('DATA FROM GET DECK: ', data[title])
+      return data
     })
 }
 
@@ -35,7 +35,7 @@ export function saveDeckTitle (title) {
 }
 
 export function addCardToDeck ({ title, card }) {
-  getDeck(title).then((deck) => {
+  return getDeck(title).then((deck) => {
     console.log('adding card to this deck->: ', deck)
     deck.questions.push(card)
     console.log('DECK CARDS ARE: ', deck["questions"])
