@@ -4,6 +4,7 @@ import { FontAwesome } from '@expo/vector-icons'
 import AddDeck from './components/AddDeck'
 import AddQuestion from './components/AddQuestion'
 import DeckDetail from './components/DeckDetail'
+import DeckList from './components/DeckList'
 
 export default class App extends React.Component {
   render() {
@@ -11,7 +12,8 @@ export default class App extends React.Component {
       <View style={styles.container}>
         {/* <AddDeck /> */}
         {/* <AddQuestion toDeck="A1" /> */}
-        <DeckDetail selectedDeck="A1" />
+        {/* <DeckDetail selectedDeck="A1" /> */}
+        <DeckList />
       </View>
     )
   }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native'
 import { getDeck } from '../utils/api'
+import AddQuestion from '../components/AddQuestion'
 
 function AddBtn ({ onPress }) {
   return (
@@ -8,6 +9,12 @@ function AddBtn ({ onPress }) {
       style={styles.submitBtn}
       onPress={onPress}>
         <Text style={styles.submitBtnText}>ADD CARD TO DECK</Text>
+
+        {/* this may go right in render
+          onPress={() => this.props.navigation.navigate(
+          'EntryDetail',
+          { entryId: key }
+        )} */}
     </TouchableOpacity>
   )
 }
@@ -33,7 +40,6 @@ export default class DeckDetail extends Component {
     };
   }
 
-// how to receive deck info and display on the screen?
   componentDidMount() {
     getDeck(this.props.title)
       .then((deck) => {
@@ -42,8 +48,16 @@ export default class DeckDetail extends Component {
       })
   }
 
+  // componentWillReceiveProps(nextProps) {
+  //   if (this.props.percent !=== nextProps.percent) {
+  //     this.setUpCircle(nextProps.percent)
+  //   }
+  // }
+  // https://engineering.musefind.com/react-lifecycle-methods-how-and-when-to-use-them-2111a1b692b1
+
   addCard = () => {
     console.log('WILL ADD CARD')
+    // <AddQuestion toDeck=this.state.title />
   }
 
   startQuiz = () => {
