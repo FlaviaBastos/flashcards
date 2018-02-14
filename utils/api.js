@@ -12,7 +12,10 @@ const STORAGE_KEY = 'Flashcards:deks'
 
 export function getDecks () {
   return AsyncStorage.getItem(STORAGE_KEY)
-    .then(decks => decks)
+    .then((results) => {
+      const data = JSON.parse(results)
+      return data
+    })
 }
 
 export function getDeck (title) {

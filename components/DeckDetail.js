@@ -67,10 +67,11 @@ export default class DeckDetail extends Component {
   render() {
     const { deck, title } = this.state
     console.log('DECK TITLE: ', title)
+    // clear this up!
     if (deck !== null) {
       console.log('DECK DETAIL: ', deck[title]["questions"].length)
       let numberQuestions = deck[title]["questions"].length
-    }
+    } // clear this up!
 
 
     return (

@@ -1,50 +1,57 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, ScrollView, FlatList } from 'react-native'
+import { View, Text, StyleSheet, ScrollView } from 'react-native'
 import { getDecks } from '../utils/api'
-import getStuff from '../fakeData'
 
 function ShowDecks ({ title, questions }) {
+  const formattedQuestions =
+    questions > 1
+    ? `${questions}  cards`
+    : `${questions}  card`
+
   return (
     <View style={styles.deckList}>
       <Text style={{fontSize: 20}}>{title}</Text>
-      <Text>{questions} cards</Text>
+      <Text>{formattedQuestions}</Text>
     </View>
   )
 }
 
 export default class DeckDetail extends Component {
-  // constructor(props) {
-  //   super(props)
-  //   this.state = {
-  //     allDecks: []
-  //   }
-  // }
-  //
-  // componentDidMount() {
-  //   getDecks(this.props.title)
-  //     .then((allDecks) => {
-  //       console.log('CAME BACK: ', allDecks)
-  //       this.setState({allDecks})
-  //     })
-  // }
+  constructor(props) {
+    super(props)
+    this.state = {
+      allDecks: null
+    }
+  }
 
-  // componentWillReceiveProps(nextProps) {
-  //   if (this.state.allDecks.length <  !=== nextProps.allDecks.length) {
-  //     this.setState(allDecks: nextProps.allDecks)
-  //   }
-  // }
-  // https://engineering.musefind.com/react-lifecycle-methods-how-and-when-to-use-them-2111a1b692b1
+  componentDidMount() {
+    getDecks(this.props.title)
+      .then((allDecks) => {
+        console.log('CAME BACK: ', typeof allDecks)
+        this.setState({allDecks})
+      })
+  }
 
+  componentWillReceiveProps (nextProps) {
+    if (this.state.allDecks.length < nextProps.allDecks.length) {
+      this.setState({allDecks: nextProps.allDecks})
+    }
+  }
+  
   render() {
-    const decks = getStuff()
-    let deckCollection = Object.entries(decks)
+    const decks = this.state.allDecks
 
     return (
-      <ScrollView>
-        {deckCollection.map(deck =>
-          <ShowDecks key={deck[0]} title={deck[1]["title"]} questions={deck[1]["questions"].length} />
+      <View style={styles.container}>
+        {decks !== null && (
+          Object.entries(decks).map(deck =>
+            <ShowDecks key={deck[0]}
+              title={deck[1]["title"]}
+              questions={deck[1]["questions"].length}
+            />
+          )
         )}
-      </ScrollView>
+      </View>
     )
   }
 }
