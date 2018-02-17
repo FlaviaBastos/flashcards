@@ -5,6 +5,7 @@ import AddDeck from './components/AddDeck'
 import AddQuestion from './components/AddQuestion'
 import DeckDetail from './components/DeckDetail'
 import DeckList from './components/DeckList'
+import Quiz from './components/Quiz'
 
 export default class App extends React.Component {
   render() {
@@ -14,6 +15,7 @@ export default class App extends React.Component {
         {/* <AddQuestion toDeck="A1" /> */}
         {/* <DeckDetail selectedDeck="A1" /> */}
         <DeckList />
+        {/* <Quiz selectedDeck="A1" /> */}
       </View>
     )
   }

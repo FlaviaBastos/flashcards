@@ -41,19 +41,18 @@ export default class DeckDetail extends Component {
   }
 
   componentDidMount() {
-    getDeck(this.props.title)
+    getDeck(this.state.title)
       .then((deck) => {
         console.log('CAME BACK: ', deck)
         this.setState({deck})
       })
   }
 
-  // componentWillReceiveProps(nextProps) {
-  //   if (this.props.percent !=== nextProps.percent) {
-  //     this.setUpCircle(nextProps.percent)
+  // componentWillReceiveProps (nextProps) {
+  //   if (this.state.deck !== nextProps.deck) {
+  //     this.setState({allDecks: nextProps.deck})
   //   }
   // }
-  // https://engineering.musefind.com/react-lifecycle-methods-how-and-when-to-use-them-2111a1b692b1
 
   addCard = () => {
     console.log('WILL ADD CARD')
@@ -69,17 +68,18 @@ export default class DeckDetail extends Component {
     console.log('DECK TITLE: ', title)
     // clear this up!
     if (deck !== null) {
-      console.log('DECK DETAIL: ', deck[title]["questions"].length)
-      let numberQuestions = deck[title]["questions"].length
+      console.log('DECK DETAIL: ', title, deck["questions"].length)
+      // let total = deck[title]["questions"].length
+      // let numberQuestions = deck[title]["questions"].length
     } // clear this up!
 
 
     return (
       <View>
         <Text> Deck Name:  {title}</Text>
-        {deck !== null &&
-          <Text> Questions in the deck: {deck[title]["questions"].length} </Text>
-        }
+        {deck !== null && (
+          <Text> Questions in the deck: {deck["questions"].length}</Text>
+        )}
         <AddBtn onPress={this.addCard} />
         <QuizBtn onPress={this.startQuiz} />
       </View>

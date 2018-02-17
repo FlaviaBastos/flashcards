@@ -25,9 +25,9 @@ export default class DeckDetail extends Component {
   }
 
   componentDidMount() {
-    getDecks(this.props.title)
+    getDecks()
       .then((allDecks) => {
-        console.log('CAME BACK: ', typeof allDecks)
+        console.log('CAME BACK: ', allDecks)
         this.setState({allDecks})
       })
   }
@@ -37,7 +37,7 @@ export default class DeckDetail extends Component {
       this.setState({allDecks: nextProps.allDecks})
     }
   }
-  
+
   render() {
     const decks = this.state.allDecks
 
