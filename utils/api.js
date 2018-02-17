@@ -1,6 +1,6 @@
 import { AsyncStorage } from 'react-native'
 
-const STORAGE_KEY = 'Flashcards:deks'
+const STORAGE_KEY = 'Flashcards:decks'
 
 // To manage your AsyncStorage database, you'll want to create four different helper methods.
 //
@@ -14,6 +14,7 @@ export function getDecks () {
   return AsyncStorage.getItem(STORAGE_KEY)
     .then((results) => {
       const data = JSON.parse(results)
+      console.log('DATA IN GETDECKS: ', data)
       return data
     })
 }
@@ -28,7 +29,7 @@ export function getDeck (title) {
 }
 
 export function saveDeckTitle (title) {
-  return AsyncStorage.setItem(STORAGE_KEY, JSON.stringify({
+  return AsyncStorage.mergeItem(STORAGE_KEY, JSON.stringify({
     [title]: {
       'title': title,
       'questions': []
