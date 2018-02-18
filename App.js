@@ -14,8 +14,8 @@ export default class App extends React.Component {
         {/* <AddDeck /> */}
         {/* <AddQuestion toDeck="A1" /> */}
         {/* <DeckDetail selectedDeck="A1" /> */}
-        <DeckList />
-        {/* <Quiz selectedDeck="A1" /> */}
+        {/* <DeckList /> */}
+        <Quiz selectedDeck="A1" />
       </View>
     )
   }
