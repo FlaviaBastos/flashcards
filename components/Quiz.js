@@ -3,24 +3,15 @@ import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-nativ
 import { getDeck } from '../utils/api'
 import Card from './Card'
 
-// function Flip ({ onPress }) {
-//   return (
-//     <TouchableOpacity
-//       style={styles.btnFlip}
-//       onPress={onPress}>
-//         <Text style={styles.flipCardText}>Flip card</Text>
-//     </TouchableOpacity>
-//   )
-// }
-
 export default class Quiz extends Component {
   constructor(props) {
     super(props)
     this.state = {
       title: this.props.selectedDeck,
       questions: null,
-      question: {},
+      card: {},
       value: '',
+      showAnswer: false,
       idx: 0
     }
   }
@@ -31,7 +22,7 @@ export default class Quiz extends Component {
         // console.log('CAME BACK: ', deck.questions)
         this.setState(() => ({
           questions: deck.questions,
-          value: deck.questions[0].question
+          card: deck.questions[0]
         }))
       })
   }
@@ -41,14 +32,15 @@ export default class Quiz extends Component {
       console.log('WILL RECEIVE PROPS')
       this.setState({value: nextProps.value})
     }
-  }
+  } // not necessary ???
 
 
   flipCard = () => {
     console.log('GONNA FLIP THIS CARD')
-    const { question, value } = this.state
-    this.setState(() => ({
-      value: 'something'
+    const { card, value, showAnswer } = this.state
+    this.setState((state) => ({
+      // value: 'something',
+      showAnswer: !showAnswer
     }))
   }
 
@@ -65,17 +57,25 @@ export default class Quiz extends Component {
   }
 
   render() {
-    const { questions, title, value } = this.state
+    const { questions, card, value, showAnswer } = this.state
     if (questions !== null) {
       console.log('QUESTIONS: ', questions)
     }
 
     return (
       <View>
-        <Card
-          value={value}
-          onFlip={() => this.flipCard()}
-        />
+        {showAnswer === true && (
+          <Card
+            value={card.answer}
+            onFlip={() => this.flipCard()}
+          />
+        )}
+        {showAnswer === false && (
+          <Card
+            value={card.question}
+            onFlip={() => this.flipCard()}
+          />
+        )}
         <TouchableOpacity
           style={styles.submitBtnCorr}
           onPress={this.correct}>
