@@ -1,12 +1,20 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-import { FontAwesome } from '@expo/vector-icons'
+import { StyleSheet, View, StatusBar } from 'react-native'
 import AddDeck from './components/AddDeck'
 import AddQuestion from './components/AddQuestion'
 import DeckDetail from './components/DeckDetail'
 import DeckList from './components/DeckList'
 import Quiz from './components/Quiz'
 import { TabNavigator } from 'react-navigation'
+import { Constants } from 'expo'
+
+function FlashStatusBar ({backgroundColor, ...props}) {
+  return (
+    <View style={{ backgroundColor, height: Constants.statusBarHeight }}>
+      <StatusBar translucent backgroundColor={backgroundColor} {...props} />
+    </View>
+  )
+}
 
 const Tabs = TabNavigator({
   DeckList: {
@@ -26,10 +34,10 @@ const Tabs = TabNavigator({
     header: null
   },
   tabBarOptions: {
-    activeTintColor: '#FF9912',
+    activeTintColor: '#FFF',
     style: {
       height: 56,
-      backgroundColor: '#fff',
+      backgroundColor: '#FF9912',
       shadowColor: 'rgba(0, 0, 0, 0.24)',
       shadowOffset: {
         width: 0,
@@ -45,6 +53,7 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+        <FlashStatusBar backgroundColor={"#FF9912"} barStyle="light-content" />
         {/* <AddDeck /> */}
         {/* <AddQuestion toDeck="A1" /> */}
         {/* <DeckDetail selectedDeck="A1" /> */}
@@ -59,8 +68,5 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: '#fff',
-    // alignItems: 'center',
-    // justifyContent: 'center',
   }
 })

@@ -27,7 +27,6 @@ export default class DeckDetail extends Component {
   componentDidMount() {
     getDecks()
       .then((allDecks) => {
-        console.log('CAME BACK: ', allDecks)
         this.setState({allDecks})
       })
   }
@@ -59,6 +58,11 @@ export default class DeckDetail extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  deckList: {
+    backgroundColor: '#FFF',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   submitBtn: {
     backgroundColor: '#FF9912',
