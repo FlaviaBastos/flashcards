@@ -64,18 +64,16 @@ export default class Quiz extends Component {
 
     return (
       <View>
-        {showAnswer === true && (
-          <Card
+        {showAnswer === true
+          ? <Card
             value={card.answer}
             onFlip={() => this.flipCard()}
-          />
-        )}
-        {showAnswer === false && (
-          <Card
+            />
+          : <Card
             value={card.question}
             onFlip={() => this.flipCard()}
-          />
-        )}
+            />
+        }
         <TouchableOpacity
           style={styles.submitBtnCorr}
           onPress={this.correct}>
