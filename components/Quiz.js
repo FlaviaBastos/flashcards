@@ -9,71 +9,66 @@ export default class Quiz extends Component {
     this.state = {
       title: this.props.selectedDeck,
       questions: null,
-      card: {},
-      value: '',
       showAnswer: false,
-      idx: 0
+      idx: 0,
+      score: 0
     }
   }
 
   componentDidMount() {
     getDeck(this.state.title)
       .then((deck) => {
-        // console.log('CAME BACK: ', deck.questions)
         this.setState(() => ({
-          questions: deck.questions,
-          card: deck.questions[0]
+          questions: deck.questions
         }))
       })
   }
 
-  componentWillReceiveProps (nextProps) {
-    if (this.state.value.length < nextProps.value.length) {
-      console.log('WILL RECEIVE PROPS')
-      this.setState({value: nextProps.value})
-    }
-  } // not necessary ???
-
-
   flipCard = () => {
-    console.log('GONNA FLIP THIS CARD')
-    const { card, value, showAnswer } = this.state
+    const { showAnswer } = this.state
     this.setState((state) => ({
-      // value: 'something',
       showAnswer: !showAnswer
     }))
   }
 
   correct = () => {
-    const { idx } = this.state
-    console.log('CORRECT. Next: ', idx)
-    // also moves to next question
+    const { idx, score, showAnswer } = this.state
+    this.setState((prevState) => ({
+      score: prevState.score + 1,
+      idx: prevState.idx + 1,
+      showAnswer: false
+    }))
   }
 
   incorrect = () => {
-    const { idx } = this.state
-    console.log('INCORRECT. Next: ', idx)
-    // also moves to next question
+    const { idx, showAnswer } = this.state
+    console.log('INCORRECT.')
+    // only moves to next question
+    this.setState((prevState) => ({
+      idx: prevState.idx + 1,
+      showAnswer: false
+    }))
   }
 
   render() {
-    const { questions, card, value, showAnswer } = this.state
+    const { questions, showAnswer, score, idx } = this.state
     if (questions !== null) {
-      console.log('QUESTIONS: ', questions)
+      console.log('QUESTIONS: ', idx, questions)
     }
 
     return (
       <View>
-        {showAnswer === true
-          ? <Card
-            value={card.answer}
-            onFlip={() => this.flipCard()}
-            />
-          : <Card
-            value={card.question}
-            onFlip={() => this.flipCard()}
-            />
-        }
+        {questions !== null && (
+          showAnswer
+            ? <Card
+              value={questions[idx].answer}
+              onFlip={() => this.flipCard()}
+              />
+            : <Card
+              value={questions[idx].question}
+              onFlip={() => this.flipCard()}
+              />
+        )}
         <TouchableOpacity
           style={styles.submitBtnCorr}
           onPress={this.correct}>
@@ -84,6 +79,7 @@ export default class Quiz extends Component {
           onPress={this.incorrect}>
             <Text style={styles.submitBtnText}>INCORRECT</Text>
         </TouchableOpacity>
+        <Text>Current score: {score} and idx: {idx}</Text>
       </View>
     )
   }
