@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native'
 import { getDeck } from '../utils/api'
 import Card from './Card'
+import DeckDetail from './DeckDetail'
 
 export default class Quiz extends Component {
   constructor(props) {
@@ -50,6 +51,10 @@ export default class Quiz extends Component {
     }))
   }
 
+  end = () => {
+    console.log('DONE! Will go back to DeckDetail')
+  }
+
   render() {
     const { questions, showAnswer, score, idx } = this.state
     if (questions !== null) {
@@ -70,7 +75,6 @@ export default class Quiz extends Component {
                   value={questions[idx].question}
                   onFlip={() => this.flipCard()}
                   />}
-              <Text>Not yet: {idx}</Text>
               <TouchableOpacity
                 style={[styles.submitBtn, {backgroundColor: '#008B00'}]}
                 onPress={this.correct}>
@@ -82,9 +86,16 @@ export default class Quiz extends Component {
                   <Text style={styles.submitBtnText}>INCORRECT</Text>
               </TouchableOpacity>
             </View>
-          : <Text>Done with cards! Total score: {score}</Text>
+          : <View>
+              <Text>Done! You got {Math.round((score *100) / questions.length)}% correct!</Text>
+              <TouchableOpacity
+                style={[styles.submitBtn, {backgroundColor: '#FF9912'}]}
+                onPress={this.end}>
+                <Text style={styles.submitBtnText}>
+                  Back to Deck</Text>
+              </TouchableOpacity>
+            </View>
         )}
-        <Text>Current score: {score} and idx: {idx}</Text>
       </View>
     )
   }
