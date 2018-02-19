@@ -43,8 +43,6 @@ export default class Quiz extends Component {
 
   incorrect = () => {
     const { idx, showAnswer } = this.state
-    console.log('INCORRECT.')
-    // only moves to next question
     this.setState((prevState) => ({
       idx: prevState.idx + 1,
       showAnswer: false
@@ -57,9 +55,6 @@ export default class Quiz extends Component {
 
   render() {
     const { questions, showAnswer, score, idx } = this.state
-    if (questions !== null) {
-      console.log('QUESTIONS: ', idx, questions)
-    }
 
     return (
       <View>
@@ -87,7 +82,7 @@ export default class Quiz extends Component {
               </TouchableOpacity>
             </View>
           : <View>
-              <Text>Done! You got {Math.round((score *100) / questions.length)}% correct!</Text>
+              <Text style={styles.score}>Done! You got {Math.round((score *100) / questions.length)}% correct!</Text>
               <TouchableOpacity
                 style={[styles.submitBtn, {backgroundColor: '#FF9912'}]}
                 onPress={this.end}>
@@ -129,4 +124,9 @@ const styles = StyleSheet.create({
     marginLeft: 30,
     marginRight: 30,
   },
+  score: {
+    color: '#000',
+    fontSize: 30,
+    textAlign: 'center'
+  }
 })
