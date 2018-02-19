@@ -59,26 +59,31 @@ export default class Quiz extends Component {
     return (
       <View>
         {questions !== null && (
-          showAnswer
-            ? <Card
-              value={questions[idx].answer}
-              onFlip={() => this.flipCard()}
-              />
-            : <Card
-              value={questions[idx].question}
-              onFlip={() => this.flipCard()}
-              />
+          idx !== questions.length
+          ? <View>
+              {showAnswer
+                ? <Card
+                  value={questions[idx].answer}
+                  onFlip={() => this.flipCard()}
+                  />
+                : <Card
+                  value={questions[idx].question}
+                  onFlip={() => this.flipCard()}
+                  />}
+              <Text>Not yet: {idx}</Text>
+              <TouchableOpacity
+                style={[styles.submitBtn, {backgroundColor: '#008B00'}]}
+                onPress={this.correct}>
+                  <Text style={styles.submitBtnText}>CORRECT</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[styles.submitBtn, {backgroundColor: '#FF0000'}]}
+                onPress={this.incorrect}>
+                  <Text style={styles.submitBtnText}>INCORRECT</Text>
+              </TouchableOpacity>
+            </View>
+          : <Text>Done with cards! Total score: {score}</Text>
         )}
-        <TouchableOpacity
-          style={[styles.submitBtn, {backgroundColor: '#008B00'}]}
-          onPress={this.correct}>
-            <Text style={styles.submitBtnText}>CORRECT</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[styles.submitBtn, {backgroundColor: '#FF0000'}]}
-          onPress={this.incorrect}>
-            <Text style={styles.submitBtnText}>INCORRECT</Text>
-        </TouchableOpacity>
         <Text>Current score: {score} and idx: {idx}</Text>
       </View>
     )
