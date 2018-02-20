@@ -5,7 +5,7 @@ import AddQuestion from './components/AddQuestion'
 import DeckDetail from './components/DeckDetail'
 import DeckList from './components/DeckList'
 import Quiz from './components/Quiz'
-import { TabNavigator } from 'react-navigation'
+import { TabNavigator, StackNavigator } from 'react-navigation'
 import { Constants } from 'expo'
 
 function FlashStatusBar ({backgroundColor, ...props}) {
@@ -49,6 +49,21 @@ const Tabs = TabNavigator({
   }
 })
 
+const MainNavigator = StackNavigator({
+  Home: {
+    screen: Tabs,
+  },
+  DeckDetail: {
+    screen: DeckDetail,
+    navigationOptions: {
+      headerTintColor: '#FFF',
+      headerStyle: {
+        backgroundColor: '#FF9912'
+      }
+    }
+  }
+})
+
 export default class App extends React.Component {
   render() {
     return (
@@ -59,7 +74,7 @@ export default class App extends React.Component {
         {/* <DeckDetail selectedDeck="A1" /> */}
         {/* <DeckList /> */}
         {/* <Quiz selectedDeck="A1" /> */}
-        <Tabs />
+        <MainNavigator />
       </View>
     )
   }

@@ -32,15 +32,20 @@ function QuizBtn ({ onPress }) {
 }
 
 export default class DeckDetail extends Component {
+  static navigationOptions = ({ navigation }) => {
+    const { selectedDeck } = navigation.state.params
+    const title = selectedDeck
+  }
   constructor(props) {
     super(props);
     this.state = {
-      title: this.props.selectedDeck,
+      // title: this.props.selectedDeck,
       deck: null
     };
   }
 
   componentDidMount() {
+    console.log('TITLE: ', this.title)
     getDeck(this.state.title)
       .then((deck) => {
         console.log('CAME BACK: ', deck)

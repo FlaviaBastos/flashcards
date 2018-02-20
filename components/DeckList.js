@@ -1,20 +1,6 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, ScrollView } from 'react-native'
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native'
 import { getDecks } from '../utils/api'
-
-function ShowDecks ({ title, questions }) {
-  const formattedQuestions =
-    questions > 1
-    ? `${questions}  cards`
-    : `${questions}  card`
-
-  return (
-    <View style={styles.deckList}>
-      <Text style={{fontSize: 20}}>{title}</Text>
-      <Text>{formattedQuestions}</Text>
-    </View>
-  )
-}
 
 export default class DeckDetail extends Component {
   constructor(props) {
@@ -31,12 +17,6 @@ export default class DeckDetail extends Component {
       })
   }
 
-  componentWillReceiveProps (nextProps) {
-    if (this.state.allDecks.length < nextProps.allDecks.length) {
-      this.setState({allDecks: nextProps.allDecks})
-    }
-  }
-
   render() {
     const decks = this.state.allDecks
 
@@ -44,10 +24,26 @@ export default class DeckDetail extends Component {
       <View style={styles.container}>
         {decks !== null && (
           Object.entries(decks).map(deck =>
-            <ShowDecks key={deck[0]}
-              title={deck[1]["title"]}
-              questions={deck[1]["questions"].length}
-            />
+            <View style={styles.deckList} key={deck[0]}>
+              <TouchableOpacity
+                onPress={() =>
+                  this.props.navigation.navigate(
+                  'DeckDetail',
+                  { selectedDeck: deck[1]["title"] }
+                )}>
+                <Text style={{fontSize: 20}}>
+                  {deck[1]["title"]}
+                </Text>
+                {deck[1]["questions"].length > 1
+                ? <Text>
+                  {deck[1]["questions"].length} cards
+                  </Text>
+                : <Text>
+                  {deck[1]["questions"].length} cards
+                  </Text>
+                }
+              </TouchableOpacity>
+            </View>
           )
         )}
       </View>
@@ -61,8 +57,16 @@ const styles = StyleSheet.create({
   },
   deckList: {
     backgroundColor: '#FFF',
+    borderRadius: 2,
     alignItems: 'center',
     justifyContent: 'center',
+    shadowRadius: 3,
+    shadowOpacity: 0.8,
+    shadowColor: 'rgba(0, 0, 0, 0.24)',
+    shadowOffset: {
+      width: 0,
+      height: 3
+    }
   },
   submitBtn: {
     backgroundColor: '#FF9912',
