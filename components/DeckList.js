@@ -29,7 +29,7 @@ export default class DeckDetail extends Component {
                 onPress={() =>
                   this.props.navigation.navigate(
                   'DeckDetail',
-                  { selectedDeck: deck[1]["title"] }
+                  { deckTitle: deck[1]["title"] }
                 )}>
                 <Text style={{fontSize: 20}}>
                   {deck[1]["title"]}

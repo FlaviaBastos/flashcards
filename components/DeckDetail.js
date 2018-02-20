@@ -8,7 +8,7 @@ function AddBtn ({ onPress }) {
     <TouchableOpacity
       style={styles.submitBtn}
       onPress={onPress}>
-        <Text style={styles.submitBtnText}>ADD CARD TO DECK</Text>
+        <Text style={styles.submitBtnText}>ADD CARD</Text>
 
         {/* this may go right in render
           onPress={() => this.props.navigation.navigate(
@@ -18,7 +18,7 @@ function AddBtn ({ onPress }) {
     </TouchableOpacity>
   )
 }
-// make the two buttons the same length
+
 // make two buttons slightly different
 
 function QuizBtn ({ onPress }) {
@@ -33,31 +33,28 @@ function QuizBtn ({ onPress }) {
 
 export default class DeckDetail extends Component {
   static navigationOptions = ({ navigation }) => {
-    const { selectedDeck } = navigation.state.params
-    const title = selectedDeck
+    const { deckTitle } = navigation.state.params
+
+    return {
+      title: deckTitle
+    }
   }
+
   constructor(props) {
     super(props);
     this.state = {
-      // title: this.props.selectedDeck,
+      title: this.props.navigation.state.params.deckTitle,
       deck: null
     };
   }
 
   componentDidMount() {
-    console.log('TITLE: ', this.title)
     getDeck(this.state.title)
       .then((deck) => {
         console.log('CAME BACK: ', deck)
         this.setState({deck})
       })
   }
-
-  // componentWillReceiveProps (nextProps) {
-  //   if (this.state.deck !== nextProps.deck) {
-  //     this.setState({allDecks: nextProps.deck})
-  //   }
-  // }
 
   addCard = () => {
     console.log('WILL ADD CARD')
@@ -81,6 +78,7 @@ export default class DeckDetail extends Component {
 
     return (
       <View>
+        <Text>in deck detail!!!</Text>
         <Text> Deck Name:  {title}</Text>
         {deck !== null && (
           <Text> Questions in the deck: {deck["questions"].length}</Text>
@@ -103,6 +101,7 @@ const styles = StyleSheet.create({
     paddingLeft: 30,
     paddingRight: 30,
     height: 45,
+    width: 190,
     borderRadius: 2,
     alignSelf: 'center',
     justifyContent: 'center',
@@ -119,13 +118,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginLeft: 30,
     marginRight: 30,
-  },
-  input: {
-    width: 200,
-    height: 44,
-    padding: 8,
-    borderWidth: 1,
-    borderColor: '#757575',
-    margin: 50,
   },
 })
