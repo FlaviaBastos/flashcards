@@ -51,10 +51,28 @@ const Tabs = TabNavigator({
 
 const MainNavigator = StackNavigator({
   Home: {
-    screen: Tabs,
+    screen: Tabs
   },
   DeckDetail: {
     screen: DeckDetail,
+    navigationOptions: {
+      headerTintColor: '#FFF',
+      headerStyle: {
+        backgroundColor: '#FF9912'
+      }
+    }
+  },
+  AddQuestion: {
+    screen: AddQuestion,
+    navigationOptions: {
+      headerTintColor: '#FFF',
+      headerStyle: {
+        backgroundColor: '#FF9912'
+      }
+    }
+  },
+  Quiz: {
+    screen: Quiz,
     navigationOptions: {
       headerTintColor: '#FFF',
       headerStyle: {
@@ -69,10 +87,7 @@ export default class App extends React.Component {
     return (
       <View style={styles.container}>
         <FlashStatusBar backgroundColor={"#FF9912"} barStyle="light-content" />
-        {/* <AddDeck /> */}
         {/* <AddQuestion toDeck="A1" /> */}
-        {/* <DeckDetail selectedDeck="A1" /> */}
-        {/* <DeckList /> */}
         {/* <Quiz selectedDeck="A1" /> */}
         <MainNavigator />
       </View>
@@ -82,6 +97,6 @@ export default class App extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 1
   }
 })

@@ -5,10 +5,18 @@ import Card from './Card'
 import DeckDetail from './DeckDetail'
 
 export default class Quiz extends Component {
+  static navigationOptions = ({ navigation }) => {
+    const { deckTitle } = navigation.state.params
+
+    return {
+      title: 'Quiz'
+    }
+  }
+
   constructor(props) {
     super(props)
     this.state = {
-      title: this.props.selectedDeck,
+      title: this.props.navigation.state.params.deckTitle,
       questions: null,
       showAnswer: false,
       idx: 0,

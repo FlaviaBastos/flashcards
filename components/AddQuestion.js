@@ -13,10 +13,17 @@ function SubmitBtn ({ onPress }) {
 }
 
 export default class AddDeck extends Component {
+  static navigationOptions = ({ navigation }) => {
+    const { toDeck } = navigation.state.params
+
+    return {
+      title: 'Add Card'
+    }
+  }
   constructor(props) {
     super(props);
     this.state = {
-      title: this.props.toDeck,
+      title: this.props.navigation.state.params.toDeck,
       question: '',
       answer: ''
     };
