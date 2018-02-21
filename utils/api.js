@@ -14,7 +14,7 @@ export function getDecks () {
   return AsyncStorage.getItem(STORAGE_KEY)
     .then((results) => {
       const data = JSON.parse(results)
-      console.log('DATA IN GETDECKS: ', data)
+      // console.log('DATA IN GETDECKS: ', data)
       return data
     })
 }
@@ -39,16 +39,9 @@ export function saveDeckTitle (title) {
 
 export function addCardToDeck ({ title, card }) {
   return getDeck(title).then((deck) => {
-    console.log('adding this card: ', card)
-    console.log('adding card to this deck->: ', deck.questions)
     deck.questions.push(card)
-    console.log('DECK CARDS ARE: ', deck["questions"])
     AsyncStorage.mergeItem(STORAGE_KEY, JSON.stringify({
       [title]: deck
-    }), () => {
-      AsyncStorage.getItem(STORAGE_KEY, (err, result) => {
-        console.log('RESULT: ', result)
-      })
-    })
+    }))
   })
 }

@@ -25,7 +25,8 @@ export default class AddDeck extends Component {
     this.state = {
       title: this.props.navigation.state.params.toDeck,
       question: '',
-      answer: ''
+      answer: '',
+      status: false
     };
   }
 
@@ -42,27 +43,28 @@ export default class AddDeck extends Component {
   }
 
   submit = () => {
-    console.log('on submit')
     const { question, answer, title } = this.state
-    console.log('STATE:', title, question, answer)
 
     let card = {
       'question': question,
       'answer': answer
     }
 
-    console.log('STATE with card:', title, card)
-    addCardToDeck({ title, card }) // saves to AsyncStorage
-    // this.setState(() => ({ input: ''})) // clears local input (necessary?)
-
-    // getDecks() // just for testing; not showing all
-
-  // this.toHome()
-
+    addCardToDeck({ title, card })
+      .then(() => this.setState(() => ({status: true})))
   }
 
   render() {
-    const { question, answer } = this.state
+    const { question, answer, status } = this.state
+
+    if (status) {
+      return (
+        <View>
+          <Text>Card added to deck!</Text>
+        </View>
+      )
+    }
+
     return (
       <View>
         <TextInput
