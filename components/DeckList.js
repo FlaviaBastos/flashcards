@@ -17,7 +17,7 @@ export default class DeckDetail extends Component {
       })
   }
 
-  render() {
+  render () {
     const decks = this.state.allDecks
 
     return (
@@ -53,7 +53,7 @@ export default class DeckDetail extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 1
   },
   deckList: {
     backgroundColor: '#FFF',
@@ -78,26 +78,18 @@ const styles = StyleSheet.create({
     borderRadius: 2,
     alignSelf: 'center',
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   submitBtnText: {
     color: '#fff',
     fontSize: 22,
-    textAlign: 'center',
+    textAlign: 'center'
   },
   center: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     marginLeft: 30,
-    marginRight: 30,
-  },
-  input: {
-    width: 200,
-    height: 44,
-    padding: 8,
-    borderWidth: 1,
-    borderColor: '#757575',
-    margin: 50,
-  },
+    marginRight: 30
+  }
 })

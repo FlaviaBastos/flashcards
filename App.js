@@ -20,13 +20,13 @@ const Tabs = TabNavigator({
   DeckList: {
     screen: DeckList,
     navigationOptions: {
-      tabBarLabel: 'DECKS',
+      tabBarLabel: 'DECKS'
     }
   },
   AddDeck: {
     screen: AddDeck,
     navigationOptions: {
-      tabBarLabel: 'NEW DECK',
+      tabBarLabel: 'NEW DECK'
     }
   }
 }, {
@@ -41,7 +41,7 @@ const Tabs = TabNavigator({
       shadowColor: 'rgba(0, 0, 0, 0.24)',
       shadowOffset: {
         width: 0,
-        height: 3,
+        height: 3
       },
       shadowRadius: 6,
       shadowOpacity: 1
@@ -83,12 +83,10 @@ const MainNavigator = StackNavigator({
 })
 
 export default class App extends React.Component {
-  render() {
+  render () {
     return (
       <View style={styles.container}>
         <FlashStatusBar backgroundColor={"#FF9912"} barStyle="light-content" />
-        {/* <AddQuestion toDeck="A1" /> */}
-        {/* <Quiz selectedDeck="A1" /> */}
         <MainNavigator />
       </View>
     )
