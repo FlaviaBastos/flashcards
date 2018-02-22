@@ -57,17 +57,17 @@ export default class Quiz extends Component {
     }))
   }
 
-  end = () => {
-    console.log('DONE! Will go back to DeckDetail')
-  }
-
   render() {
-    const { questions, showAnswer, score, idx } = this.state
+    const { questions, showAnswer, score, idx, title } = this.state
 
     return (
       <View>
         {questions !== null && (
-          idx !== questions.length
+          questions.length === 0
+          ? <Text style={styles.score}>
+              There are no cards in this deck yet!
+            </Text>
+          : idx !== questions.length
           ? <View>
               {showAnswer
                 ? <Card
@@ -93,7 +93,11 @@ export default class Quiz extends Component {
               <Text style={styles.score}>Done! You got {Math.round((score *100) / questions.length)}% correct!</Text>
               <TouchableOpacity
                 style={[styles.submitBtn, {backgroundColor: '#FF9912'}]}
-                onPress={this.end}>
+                onPress={() =>
+                  this.props.navigation.navigate(
+                  'DeckDetail',
+                  { deckTitle: title }
+                )}>
                 <Text style={styles.submitBtnText}>
                   Back to Deck</Text>
               </TouchableOpacity>
@@ -134,7 +138,7 @@ const styles = StyleSheet.create({
   },
   score: {
     color: '#000',
-    fontSize: 30,
+    fontSize: 25,
     textAlign: 'center'
   }
 })

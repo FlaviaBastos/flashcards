@@ -31,12 +31,16 @@ export default class DeckDetail extends Component {
 
     return (
       <View>
-        <Text> Deck Name:  {title}</Text>
+        <Text style={styles.header}> Deck Name:</Text>
+        <Text style={styles.text}>{title}</Text>
         {deck !== null && (
-          <Text> Questions in this deck: {deck["questions"].length}</Text>
+          <View>
+            <Text style={styles.header}> Questions in this deck:</Text>
+            <Text style={styles.text}>{deck["questions"].length}</Text>
+          </View>
         )}
         <TouchableOpacity
-          style={styles.submitBtn}
+          style={[styles.submitBtn, {backgroundColor: '#FF9912'}]}
           onPress={() =>
             this.props.navigation.navigate(
             'AddQuestion',
@@ -45,7 +49,7 @@ export default class DeckDetail extends Component {
             <Text style={styles.submitBtnText}>ADD CARD</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={styles.submitBtn}
+          style={[styles.submitBtn, {backgroundColor: '#c66a00'}]}
           onPress={() =>
             this.props.navigation.navigate(
             'Quiz',
@@ -64,7 +68,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   submitBtn: {
-    backgroundColor: '#FF9912',
     margin: 10,
     padding: 10,
     paddingLeft: 30,
@@ -81,11 +84,14 @@ const styles = StyleSheet.create({
     fontSize: 22,
     textAlign: 'center',
   },
-  center: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginLeft: 30,
-    marginRight: 30,
+  header: {
+    color: '#000',
+    fontSize: 12,
+    textAlign: 'center'
   },
+  text: {
+    color: '#000',
+    fontSize: 25,
+    textAlign: 'center'
+  }
 })

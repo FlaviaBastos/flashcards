@@ -16,7 +16,8 @@ export default class AddDeck extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      input: ''
+      input: '',
+      status: false
     };
   }
 
@@ -27,24 +28,37 @@ export default class AddDeck extends Component {
   }
 
   submit = () => {
-    console.log('on submit')
     const entry = this.state.input
-    console.log('STATE:', entry)
 
-    saveDeckTitle(entry) // saves to AsyncStorage
-    // this.setState(() => ({ input: ''})) // clears local input (necessary?)
-
-    getDecks() // just for testing; not showing all
-
-  // this.toHome()
-
+    saveDeckTitle(entry)
+      .then(() => this.setState(() => ({status: true})))
   }
 
   render() {
-    const { input } = this.state
+    const { input, status } = this.state
+
+    if (status) {
+      return (
+        <View>
+          <Text style={styles.text}>New deck added!</Text>
+          <TouchableOpacity
+            style={styles.submitBtn}
+            onPress={() =>
+              this.props.navigation.navigate(
+              'AddQuestion',
+              { toDeck: input }
+            )}>
+              <Text style={styles.submitBtnText}>ADD CARD</Text>
+          </TouchableOpacity>
+        </View>
+      )
+    }
+
     return (
-      <View>
-        <Text style={{alignSelf: 'center'}}>What is the title of your new deck?</Text>
+      <View style={styles.container}>
+        <Text style={styles.text}>
+          What is the title of your new deck?
+        </Text>
         <TextInput
           value={input}
           style={styles.input}
@@ -76,19 +90,17 @@ const styles = StyleSheet.create({
     fontSize: 22,
     textAlign: 'center',
   },
-  center: {
-    flex: 1,
+  input: {
     justifyContent: 'center',
     alignItems: 'center',
-    marginLeft: 30,
-    marginRight: 30,
-  },
-  input: {
-    width: 200,
-    height: 44,
     padding: 8,
     borderWidth: 1,
     borderColor: '#757575',
     margin: 50,
   },
+  text: {
+    color: '#000',
+    fontSize: 25,
+    textAlign: 'center'
+  }
 })

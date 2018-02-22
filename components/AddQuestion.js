@@ -105,16 +105,9 @@ const styles = StyleSheet.create({
     fontSize: 22,
     textAlign: 'center',
   },
-  center: {
-    flex: 1,
+  input: {
     justifyContent: 'center',
     alignItems: 'center',
-    marginLeft: 30,
-    marginRight: 30,
-  },
-  input: {
-    width: 200,
-    height: 44,
     padding: 8,
     borderWidth: 1,
     borderColor: '#757575',
