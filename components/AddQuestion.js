@@ -60,7 +60,7 @@ export default class AddDeck extends Component {
     if (status) {
       return (
         <View style={styles.container}>
-          <Text>Card added to deck!</Text>
+          <Text style={styles.text}>Card added to deck!</Text>
         </View>
       )
     }
@@ -89,6 +89,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center'
+  },
+  text: {
+    color: '#000',
+    fontSize: 25,
+    textAlign: 'center'
   },
   submitBtn: {
     backgroundColor: '#FF9912',
