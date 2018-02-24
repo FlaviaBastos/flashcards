@@ -39,7 +39,7 @@ export default class AddDeck extends Component {
 
     if (status) {
       return (
-        <View>
+        <View style={styles.container}>
           <Text style={styles.text}>New deck added!</Text>
           <TouchableOpacity
             style={styles.submitBtn}
@@ -73,6 +73,7 @@ export default class AddDeck extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: 'center'
   },
   submitBtn: {
     backgroundColor: '#FF9912',

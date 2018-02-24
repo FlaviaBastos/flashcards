@@ -17,6 +17,8 @@ export default function Card ({ value, onFlip }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   btnFlip: {
     backgroundColor: '#fff',
@@ -26,9 +28,7 @@ const styles = StyleSheet.create({
     paddingRight: 30,
     height: 45,
     borderRadius: 2,
-    alignSelf: 'center',
-    justifyContent: 'center',
-    alignItems: 'center'
+    alignSelf: 'center'
   },
   flipCardText: {
     color: '#FF9912',

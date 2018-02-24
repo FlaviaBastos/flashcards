@@ -30,12 +30,12 @@ export default class DeckDetail extends Component {
     const { deck, title } = this.state
 
     return (
-      <View>
+      <View style={styles.container}>
         <Text style={styles.header}> Deck Name:</Text>
         <Text style={styles.text}>{title}</Text>
         {deck !== null && (
           <View>
-            <Text style={styles.header}> Questions in this deck:</Text>
+            <Text style={styles.header}> Cards in this deck:</Text>
             <Text style={styles.text}>{deck["questions"].length}</Text>
           </View>
         )}
@@ -62,10 +62,10 @@ export default class DeckDetail extends Component {
   }
 }
 
-// make two buttons slightly different
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: 'center'
   },
   submitBtn: {
     margin: 10,

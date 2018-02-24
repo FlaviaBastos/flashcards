@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-nativ
 import { getDeck } from '../utils/api'
 import Card from './Card'
 import DeckDetail from './DeckDetail'
+import { Entypo } from '@expo/vector-icons'
 
 export default class Quiz extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -61,14 +62,17 @@ export default class Quiz extends Component {
     const { questions, showAnswer, score, idx, title } = this.state
 
     return (
-      <View>
+      <View style={styles.container}>
         {questions !== null && (
           questions.length === 0
-          ? <Text style={styles.score}>
-              There are no cards in this deck yet!
-            </Text>
+          ? <View style={styles.box}>
+              <Text style={styles.score}>
+                There are no cards in this deck yet!
+              </Text>
+              <Entypo name='emoji-sad' size={30} color='#000' />
+            </View>
           : idx !== questions.length
-          ? <View>
+          ? <View style={styles.box}>
               {showAnswer
                 ? <Card
                   value={questions[idx].answer}
@@ -89,7 +93,7 @@ export default class Quiz extends Component {
                   <Text style={styles.submitBtnText}>INCORRECT</Text>
               </TouchableOpacity>
             </View>
-          : <View>
+          : <View  style={styles.box}>
               <Text style={styles.score}>Done! You got {Math.round((score *100) / questions.length)}% correct!</Text>
               <TouchableOpacity
                 style={[styles.submitBtn, {backgroundColor: '#FF9912'}]}
@@ -112,6 +116,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  box: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   submitBtn: {
     margin: 10,
     padding: 10,
@@ -129,16 +138,9 @@ const styles = StyleSheet.create({
     fontSize: 22,
     textAlign: 'center',
   },
-  center: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginLeft: 30,
-    marginRight: 30,
-  },
   score: {
     color: '#000',
     fontSize: 25,
-    textAlign: 'center'
+    textAlign: 'center',
   }
 })

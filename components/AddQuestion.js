@@ -59,14 +59,14 @@ export default class AddDeck extends Component {
 
     if (status) {
       return (
-        <View>
+        <View style={styles.container}>
           <Text>Card added to deck!</Text>
         </View>
       )
     }
 
     return (
-      <View>
+      <View style={styles.container}>
         <TextInput
           placeholder='Type your question here'
           value={question}
@@ -88,6 +88,7 @@ export default class AddDeck extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: 'center'
   },
   submitBtn: {
     backgroundColor: '#FF9912',

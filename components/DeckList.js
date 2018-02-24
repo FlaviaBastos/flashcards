@@ -21,32 +21,34 @@ export default class DeckDetail extends Component {
     const decks = this.state.allDecks
 
     return (
-      <View style={styles.container}>
-        {decks !== null && (
-          Object.entries(decks).map(deck =>
-            <View style={styles.deckList} key={deck[0]}>
-              <TouchableOpacity
-                onPress={() =>
-                  this.props.navigation.navigate(
-                  'DeckDetail',
-                  { deckTitle: deck[1]["title"] }
-                )}>
-                <Text style={{fontSize: 20}}>
-                  {deck[1]["title"]}
-                </Text>
-                {deck[1]["questions"].length > 1
-                ? <Text>
-                  {deck[1]["questions"].length} cards
+      <ScrollView style={styles.container}>
+        <View style={{justifyContent: 'center'}}>
+          {decks !== null && (
+            Object.entries(decks).map(deck =>
+              <View style={styles.deckList} key={deck[0]}>
+                <TouchableOpacity
+                  onPress={() =>
+                    this.props.navigation.navigate(
+                    'DeckDetail',
+                    { deckTitle: deck[1]["title"] }
+                  )}>
+                  <Text style={styles.header}>
+                    {deck[1]["title"]}
                   </Text>
-                : <Text>
-                  {deck[1]["questions"].length} cards
-                  </Text>
-                }
-              </TouchableOpacity>
-            </View>
-          )
-        )}
-      </View>
+                  {deck[1]["questions"].length > 1
+                  ? <Text style={styles.text}>
+                    {deck[1]["questions"].length} cards
+                    </Text>
+                  : <Text style={styles.text}>
+                    {deck[1]["questions"].length} cards
+                    </Text>
+                  }
+                </TouchableOpacity>
+              </View>
+            )
+          )}
+        </View>
+      </ScrollView>
     )
   }
 }
@@ -57,9 +59,10 @@ const styles = StyleSheet.create({
   },
   deckList: {
     backgroundColor: '#FFF',
+    margin: 20,
+    padding: 20,
     borderRadius: 2,
     alignItems: 'center',
-    justifyContent: 'center',
     shadowRadius: 3,
     shadowOpacity: 0.8,
     shadowColor: 'rgba(0, 0, 0, 0.24)',
@@ -85,11 +88,14 @@ const styles = StyleSheet.create({
     fontSize: 22,
     textAlign: 'center'
   },
-  center: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginLeft: 30,
-    marginRight: 30
+  header: {
+    color: '#000',
+    fontSize: 20,
+    textAlign: 'center'
+  },
+  text: {
+    color: '#000',
+    fontSize:12,
+    textAlign: 'center'
   }
 })
