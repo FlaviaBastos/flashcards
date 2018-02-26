@@ -26,6 +26,13 @@ export default class DeckDetail extends Component {
       })
   }
 
+  componentDidUpdate() {
+    getDeck(this.state.title)
+      .then((deck) => {
+        this.setState({deck})
+      })
+  }
+
   render() {
     const { deck, title } = this.state
 
