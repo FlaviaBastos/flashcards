@@ -50,6 +50,11 @@ export default class AddDeck extends Component {
             )}>
               <Text style={styles.submitBtnText}>ADD CARD</Text>
           </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.submitBtn}
+            onPress={() => this.setState(() => ({status: false}))}>
+              <Text style={styles.submitBtnText}>ADD ANOTHER DECK</Text>
+          </TouchableOpacity>
         </View>
       )
     }
@@ -78,6 +83,7 @@ const styles = StyleSheet.create({
   submitBtn: {
     backgroundColor: '#FF9912',
     padding: 10,
+    marginTop: 10,
     paddingLeft: 30,
     paddingRight: 30,
     height: 45,
