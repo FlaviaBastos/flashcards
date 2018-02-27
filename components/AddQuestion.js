@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, KeyboardAvoidingView } from 'react-native'
 import { addCardToDeck, getDecks } from '../utils/api'
 
 function SubmitBtn ({ onPress }) {
@@ -66,7 +66,7 @@ export default class AddDeck extends Component {
     }
 
     return (
-      <View style={styles.container}>
+      <KeyboardAvoidingView behavior='padding' style={styles.container}>
         <TextInput
           placeholder='Type your question here'
           value={question}
@@ -80,7 +80,7 @@ export default class AddDeck extends Component {
           onChangeText={this.handleAnswer}
         />
         <SubmitBtn onPress={this.submit} />
-      </View>
+      </KeyboardAvoidingView>
     )
   }
 }
