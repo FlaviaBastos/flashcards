@@ -2,22 +2,11 @@ import React, { Component } from 'react'
 import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native'
 import { saveDeckTitle, getDecks } from '../utils/api'
 
-function SubmitBtn ({ onPress }) {
-  return (
-    <TouchableOpacity
-      style={styles.submitBtn}
-      onPress={onPress}>
-        <Text style={styles.submitBtnText}>SUBMIT</Text>
-    </TouchableOpacity>
-  )
-}
-
 export default class AddDeck extends Component {
   constructor() {
     super();
     this.state = {
-      input: '',
-      status: false
+      input: ''
     };
   }
 
@@ -33,31 +22,13 @@ export default class AddDeck extends Component {
 
   submit = () => {
     const entry = this.state.input
-
     saveDeckTitle(entry)
-      .then(() => this.setState(() => ({status: true})))
+    this.props.navigation.navigate(
+      'DeckDetail', { deckTitle: entry })
   }
 
   render() {
-    const { input, status } = this.state
-
-    if (status) {
-      return (
-        <View style={styles.container}>
-          <Text style={styles.text}>New deck added!</Text>
-          <TouchableOpacity
-            style={styles.submitBtn}
-            onPress={() => this.goToAddCard()}>
-              <Text style={styles.submitBtnText}>ADD CARD</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.submitBtn}
-            onPress={() => this.setState(() => ({status: false}))}>
-              <Text style={styles.submitBtnText}>ADD ANOTHER DECK</Text>
-          </TouchableOpacity>
-        </View>
-      )
-    }
+    const { input } = this.state
 
     return (
       <View style={styles.container}>
@@ -69,7 +40,11 @@ export default class AddDeck extends Component {
           style={styles.input}
           onChangeText={this.handleTextChange}
         />
-        <SubmitBtn onPress={this.submit} />
+        <TouchableOpacity
+          style={styles.submitBtn}
+          onPress={() => this.submit()}>
+            <Text style={styles.submitBtnText}>SUBMIT</Text>
+        </TouchableOpacity>
       </View>
     )
   }
