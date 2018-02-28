@@ -13,8 +13,8 @@ function SubmitBtn ({ onPress }) {
 }
 
 export default class AddDeck extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       input: '',
       status: false
@@ -22,9 +22,13 @@ export default class AddDeck extends Component {
   }
 
   handleTextChange = (input) => {
-    this.setState(() => ({
-      input
-    }))
+    this.setState({ input })
+  }
+
+  goToAddCard = () => {
+    const { input } = this.state
+    this.props.navigation.navigate(
+    'AddQuestion', { toDeck: input })
   }
 
   submit = () => {
@@ -43,11 +47,7 @@ export default class AddDeck extends Component {
           <Text style={styles.text}>New deck added!</Text>
           <TouchableOpacity
             style={styles.submitBtn}
-            onPress={() =>
-              this.props.navigation.navigate(
-              'AddQuestion',
-              { toDeck: input }
-            )}>
+            onPress={() => this.goToAddCard()}>
               <Text style={styles.submitBtnText}>ADD CARD</Text>
           </TouchableOpacity>
           <TouchableOpacity

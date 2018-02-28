@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native'
 import { getDecks } from '../utils/api'
 
-export default class DeckDetail extends Component {
+export default class DeckList extends Component {
   constructor(props) {
     super(props)
     this.state = {
