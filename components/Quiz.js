@@ -58,6 +58,23 @@ export default class Quiz extends Component {
     }))
   }
 
+  goToDeckDetail = () => {
+    const { title } = this.state
+    this.props.navigation.navigate(
+      'DeckDetail', { deckTitle: title })
+  }
+
+  restartQuiz = () => {
+    const { idx, score, showAnswer, title } = this.state
+    this.setState(() => ({
+      score: 0,
+      idx: 0,
+      showAnswer: false
+    }))
+    this.props.navigation.navigate(
+      'Quiz', { deckTitle: title })
+  }
+
   render() {
     const { questions, showAnswer, score, idx, title } = this.state
 
@@ -97,13 +114,15 @@ export default class Quiz extends Component {
               <Text style={styles.score}>Done! You got {Math.round((score *100) / questions.length)}% correct!</Text>
               <TouchableOpacity
                 style={[styles.submitBtn, {backgroundColor: '#FF9912'}]}
-                onPress={() =>
-                  this.props.navigation.navigate(
-                  'DeckDetail',
-                  { deckTitle: title }
-                )}>
+                onPress={() => this.goToDeckDetail()}>
                 <Text style={styles.submitBtnText}>
                   Back to Deck</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[styles.submitBtn, {backgroundColor: '#c66a00'}]}
+                onPress={() => this.restartQuiz()}>
+                <Text style={styles.submitBtnText}>
+                  Restart Quiz</Text>
               </TouchableOpacity>
             </View>
         )}
@@ -126,6 +145,7 @@ const styles = StyleSheet.create({
     padding: 10,
     paddingLeft: 30,
     paddingRight: 30,
+    marginTop: 10,
     height: 45,
     width: 190,
     borderRadius: 6,
