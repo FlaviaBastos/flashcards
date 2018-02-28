@@ -45,7 +45,7 @@ export default class AddDeck extends Component {
   submit = () => {
     const { question, answer, title } = this.state
 
-    let card = {
+    const card = {
       'question': question,
       'answer': answer
     }
