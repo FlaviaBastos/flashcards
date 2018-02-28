@@ -7,6 +7,7 @@ import DeckList from './components/DeckList'
 import Quiz from './components/Quiz'
 import { TabNavigator, StackNavigator } from 'react-navigation'
 import { Constants } from 'expo'
+import { setLocalNotification } from './utils/helpers'
 
 function FlashStatusBar ({backgroundColor, ...props}) {
   return (
@@ -83,6 +84,10 @@ const MainNavigator = StackNavigator({
 })
 
 export default class App extends React.Component {
+  componentDidMount() {
+    setLocalNotification()
+  }
+
   render () {
     return (
       <View style={styles.container}>

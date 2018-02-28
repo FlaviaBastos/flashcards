@@ -4,6 +4,7 @@ import { getDeck } from '../utils/api'
 import Card from './Card'
 import DeckDetail from './DeckDetail'
 import { Entypo } from '@expo/vector-icons'
+import { clearLocalNotification, setLocalNotification } from '../utils/helpers'
 
 export default class Quiz extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -62,6 +63,8 @@ export default class Quiz extends Component {
     const { title } = this.state
     this.props.navigation.navigate(
       'DeckDetail', { deckTitle: title })
+    clearLocalNotification()
+      .then(setLocalNotification)
   }
 
   restartQuiz = () => {
@@ -73,6 +76,8 @@ export default class Quiz extends Component {
     }))
     this.props.navigation.navigate(
       'Quiz', { deckTitle: title })
+    clearLocalNotification()
+      .then(setLocalNotification)
   }
 
   render() {
