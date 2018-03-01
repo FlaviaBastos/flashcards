@@ -14,12 +14,6 @@ export default class AddDeck extends Component {
     this.setState({ input })
   }
 
-  goToAddCard = () => {
-    const { input } = this.state
-    this.props.navigation.navigate(
-    'AddQuestion', { toDeck: input })
-  }
-
   submit = () => {
     const entry = this.state.input
     saveDeckTitle(entry)
@@ -43,7 +37,7 @@ export default class AddDeck extends Component {
         <TouchableOpacity
           style={styles.submitBtn}
           onPress={() => this.submit()}>
-            <Text style={styles.submitBtnText}>SUBMIT</Text>
+            <Text style={styles.submitBtnText}>Submit</Text>
         </TouchableOpacity>
       </View>
     )

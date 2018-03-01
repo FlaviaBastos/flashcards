@@ -26,13 +26,6 @@ export default class DeckDetail extends Component {
       })
   }
 
-  componentDidUpdate() {
-    getDeck(this.state.title)
-      .then((deck) => {
-        this.setState({deck})
-      })
-  }
-
   render() {
     const { deck, title } = this.state
 
@@ -53,7 +46,7 @@ export default class DeckDetail extends Component {
             'AddQuestion',
             { toDeck: title }
           )}>
-            <Text style={styles.submitBtnText}>ADD CARD</Text>
+            <Text style={styles.submitBtnText}>Add card</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={[styles.submitBtn, {backgroundColor: '#c66a00'}]}
@@ -62,7 +55,7 @@ export default class DeckDetail extends Component {
             'Quiz',
             { deckTitle: title }
           )}>
-            <Text style={styles.submitBtnText}>START QUIZ</Text>
+            <Text style={styles.submitBtnText}>Start quiz</Text>
         </TouchableOpacity>
       </View>
     )

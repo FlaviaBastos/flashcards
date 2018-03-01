@@ -61,10 +61,10 @@ export default class Quiz extends Component {
 
   goToDeckDetail = () => {
     const { title } = this.state
-    this.props.navigation.navigate(
-      'DeckDetail', { deckTitle: title })
     clearLocalNotification()
       .then(setLocalNotification)
+    this.props.navigation.navigate(
+      'DeckDetail', { deckTitle: title })
   }
 
   restartQuiz = () => {
@@ -74,10 +74,10 @@ export default class Quiz extends Component {
       idx: 0,
       showAnswer: false
     }))
-    this.props.navigation.navigate(
-      'Quiz', { deckTitle: title })
     clearLocalNotification()
       .then(setLocalNotification)
+    this.props.navigation.navigate(
+      'Quiz', { deckTitle: title })
   }
 
   render() {

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, KeyboardAvoidingView } from 'react-native'
 import { addCardToDeck, getDecks } from '../utils/api'
+import { clearLocalNotification, setLocalNotification } from '../utils/helpers'
 
 function SubmitBtn ({ onPress }) {
   return (
@@ -54,6 +55,20 @@ export default class AddDeck extends Component {
       .then(() => this.setState(() => ({status: true})))
   }
 
+  goToAddCard = () => {
+    const { title } = this.state
+    this.props.navigation.navigate(
+    'AddQuestion', { toDeck: title })
+  }
+
+  goToDeckDetail = () => {
+    const { title } = this.state
+    clearLocalNotification()
+      .then(setLocalNotification)
+    this.props.navigation.navigate(
+      'DeckDetail', { deckTitle: title })
+  }
+
   render() {
     const { question, answer, status } = this.state
 
@@ -61,6 +76,18 @@ export default class AddDeck extends Component {
       return (
         <View style={styles.container}>
           <Text style={styles.text}>Card added to deck!</Text>
+          <TouchableOpacity
+            style={[styles.submitBtn, {backgroundColor: '#FF9912'}]}
+            onPress={() => this.goToAddCard()}>
+            <Text style={styles.submitBtnText}>
+              Add another card</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.submitBtn, {backgroundColor: '#c66a00'}]}
+            onPress={() => this.goToDeckDetail()}>
+            <Text style={styles.submitBtnText}>
+              Back to Deck</Text>
+          </TouchableOpacity>
         </View>
       )
     }
@@ -100,6 +127,7 @@ const styles = StyleSheet.create({
     padding: 10,
     paddingLeft: 30,
     paddingRight: 30,
+    marginTop: 10,
     height: 45,
     borderRadius: 2,
     alignSelf: 'center',
