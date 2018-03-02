@@ -3,8 +3,8 @@ import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-nati
 import { getDecks } from '../utils/api'
 
 export default class DeckList extends Component {
-  constructor(props) {
-    super(props)
+  constructor() {
+    super()
     this.state = {
       allDecks: null
     }
