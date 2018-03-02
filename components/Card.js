@@ -1,9 +1,10 @@
 import React from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 
-export default function Card ({ value, onFlip }) {
+export default function Card ({ count, value, onFlip }) {
   return (
     <View>
+      <Text style={styles.cardCount}>{count}</Text>
       <Text style={styles.cardText}>{value}</Text>
       <TouchableOpacity
         style={styles.btnFlip}
@@ -40,5 +41,8 @@ const styles = StyleSheet.create({
     color: '#000',
     fontSize: 30,
     textAlign: 'center'
+  },
+  cardCount: {
+    color: '#B0171F'
   }
 })

@@ -97,10 +97,12 @@ export default class Quiz extends Component {
           ? <View style={styles.box}>
               {showAnswer
                 ? <Card
+                  count={`${idx}/${questions.length}`}
                   value={questions[idx].answer}
                   onFlip={() => this.flipCard()}
                   />
                 : <Card
+                  count={`${idx}/${questions.length}`}
                   value={questions[idx].question}
                   onFlip={() => this.flipCard()}
                   />}
